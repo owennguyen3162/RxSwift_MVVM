@@ -103,6 +103,7 @@ class MyCalculator {
         let secondNumber = datasource.getSecondNumber()
         
         let result = firstNumber + secondNumber
+        print(result)
         
         if let delegate = delegate {
             delegate.calculate(first: firstNumber, second: secondNumber, result: result)
@@ -165,3 +166,46 @@ class MyClass: AddOperatorDelegate, AddOperatorDatasource {
 
 let myClass =  MyClass(first: 10, second:  30)
 myClass.handleClosure()
+
+
+    
+
+
+//Bước 1: Các closure được định nghĩa
+//Sử dụng closure là các đối số của function được gọi
+//Các giá trị biến được gắn vào closure
+
+//Bước 2: Thực hiện function
+//Giá trị của các tham số trong hàm được truyền vào từ closure
+//Hàm được gọi và sau khi kết thúc hàm thì các đối số sẽ được giải phóng
+//Các closure truyền vào cũng được giải phóng theo
+
+//Bước 3: Nhận giá trị trả về
+//Function return về thì các closure mà đã bị giải phóng rồi nên việc thực hiện tiếp sẽ không thể được
+
+
+//@nonescaping closure
+
+//Với swift 1 và 2 thì mặc địch sẽ là không phải @nonescaping. Nên khi khai báo thì chúng ta cần phải thêm từ khoá @nonescaping vào.
+//Với swift 3 và 3 thì ngược lại.
+//Life cycle của một @nonescaping closure rất đơn giản:
+//Closure được pass vào function argument.
+//Function excute closure. Closure được giải phóng khỏi bộ nhớ.
+//Function return.
+//Khi sử dụng @nonescaping closure, compiler cũng không cần reference tới self, không xảy ra trường hợp reference cycle. Vì vậy không cần sử dụng [weak self] hoặc [unowned self].
+
+
+func getSumOf (numbers: [Int]: complete: (Int) -> Void){
+    var number = 0
+    
+    for numAd in numbers {
+        number += numAd
+    }
+    complete(number)
+}
+
+var doSomeThing = getSumOf(numbers: [2,3,4]){
+    e in print(e)
+}
+
+doSomeThing()
