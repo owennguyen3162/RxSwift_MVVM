@@ -1,5 +1,4 @@
 import UIKit
-
 //  Closure là 1 block code có thể tách ra để tái sử dụng
 //  Đơn giản closure là 1 function nhưng khuyết danh
 //  Ta có thể gán closure vào biến và sử dụng nó như 1 value
